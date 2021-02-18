@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <!--关闭nacos心跳-->
+    <logger name="com.alibaba.nacos" level="error" additivity="false">
+        <appender-ref ref="file_error"/>
+    </logger>
+    <logger name="com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder" level="debug" additivity="false">
+        <appender-ref ref="file_info"/>
+        <appender-ref ref="console"/>
+    </logger>
+    <logger name="org.apache" level="error" additivity="false">
+        <appender-ref ref="file_error"/>
+    </logger>
+    <logger name="springfox.documentation" level="error" additivity="false">
+        <appender-ref ref="file_error"/>
+    </logger>
+    <logger name="com.zaxxer.hikari" level="error" additivity="false">
+        <appender-ref ref="file_error"/>
+    </logger>
+</included>
+

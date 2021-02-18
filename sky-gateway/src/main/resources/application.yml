@@ -1,0 +1,53 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            # 允许携带认证信息
+            # 允许跨域的源(网站域名/ip)，设置*为全部
+            # 允许跨域请求里的head字段，设置*为全部
+            # 允许跨域的method， 默认为GET和OPTIONS，设置*为全部
+            # 跨域允许的有效期
+            allow-credentials: true
+            allowed-origins:
+              - "*"
+              - "http://localhost:8080"
+              - "http://192.168.37.143:8080"
+              - "http://localhost:8083"
+              - "http://localhost:8082"
+            allowed-headers: "*"
+            allowed-methods:
+              - OPTIONS
+              - GET
+              - POST
+            max-age: 3600
+      routes:
+        - id: SKY-AUTH-ROUTE
+          uri: lb://sky-auth
+          predicates:
+            - Path=/auth/**
+        - id: SKY-SYSTEM-ROUTE
+          uri: lb://sky-sys
+          predicates:
+            - Path=/sys/**
+        - id: SKY-GENERATOR-ROUTE
+          uri: lb://sky-generator
+          predicates:
+            - Path=/generator/**
+yanyu:
+  gateway:
+    swagger:
+      locator:
+        enabled: true
+      service-ids:
+        - sky-auth
+        - sky-sys
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

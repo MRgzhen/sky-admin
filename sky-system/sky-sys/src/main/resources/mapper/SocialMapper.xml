@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanyu.sky.sys.dao.SocialMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.yanyu.sky.sys.bean.po.Social">
+         <result column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="app" property="app" />
+        <result column="open_id" property="openId" />
+        <result column="union_id" property="unionId" />
+        <result column="nick_name" property="nickName" />
+        <result column="avatar" property="avatar" />
+        <result column="company" property="company" />
+        <result column="address" property="address" />
+        <result column="sex" property="sex" />
+        <result column="remark" property="remark" />
+        <result column="access_token" property="accessToken" />
+        <result column="refresh_token" property="refreshToken" />
+        <result column="expire_time" property="expireTime" />
+        <result column="create_user" property="createUser" />
+        <result column="create_time" property="createTime" />
+        <result column="update_user" property="updateUser" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_del" property="isDel" />
+    </resultMap>
+
+    <select id = "listByUserId" parameterType="com.yanyu.sky.sys.bean.vo.social.SocialOfUserInfoVo" resultType="com.yanyu.sky.sys.bean.vo.social.SocialOfUserVo">
+        select ss.*,'1' as status from sys_social ss
+        where ss.user_id = #{vo.userId} and ss.is_del = '0'
+    </select>
+</mapper>

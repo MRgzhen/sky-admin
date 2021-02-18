@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanyu.sky.sys.dao.RoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.yanyu.sky.sys.bean.po.Role">
+        <id column="id" property="id" />
+        <result column="create_user" property="createUser" />
+        <result column="create_time" property="createTime" />
+        <result column="update_user" property="updateUser" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_del" property="isDel" />
+        <result column="code" property="code" />
+        <result column="name" property="name" />
+        <result column="enabled" property="enabled" />
+        <result column="type" property="type" />
+    </resultMap>
+
+    <select id="listRolesByUserIdAndTenantCodeNotLogin" parameterType="map" resultMap="BaseResultMap">
+        select sr.* from
+        sys_role sr,
+        sys_role_user sru
+        where sr.is_del = '0' and sr.enabled = '1'
+        and sr.id = sru.role_id
+        and sru.user_id = #{userId}
+    </select>
+
+    <select id="listRolesByUserId" parameterType="string" resultMap="BaseResultMap">
+        select sr.* from
+        sys_role sr,
+        sys_role_user sru
+        where sr.is_del = '0' and sr.enabled = '1'
+        and sr.id = sru.role_id
+        and sru.user_id = #{userId}
+    </select>
+
+    <select id="listRolePage" parameterType="com.yanyu.sky.sys.bean.vo.role.RoleSearchVo" resultType="com.yanyu.sky.sys.bean.vo.role.RoleInfoVo">
+        select * from sys_role
+        <where>
+            and is_del = '0'
+            <if test="vo.code != null and vo.code != ''">
+                and code like concat('%',#{vo.code},'%')
+            </if>
+            <if test="vo.name != null and vo.name != ''">
+                and name like concat('%',#{vo.name},'%')
+            </if>
+        </where>
+        order by update_time desc
+    </select>
+</mapper>

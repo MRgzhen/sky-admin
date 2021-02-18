@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanyu.sky.sys.dao.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.yanyu.sky.sys.bean.po.User">
+        <id column="id" property="id" />
+        <result column="create_user" property="createUser" />
+        <result column="create_time" property="createTime" />
+        <result column="update_user" property="updateUser" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_del" property="isDel" />
+        <result column="user_name" property="userName" />
+        <result column="password" property="password" />
+        <result column="nick_name" property="nickName" />
+        <result column="real_name" property="realName" />
+        <result column="sex" property="sex" />
+        <result column="birthday" property="birthday" />
+        <result column="avatar" property="avatar" />
+        <result column="phone" property="phone" />
+        <result column="eamil" property="eamil" />
+        <result column="is_sys" property="isSys" />
+        <result column="enabled" property="enabled" />
+        <result column="type" property="type" />
+        <result column="password_valid" property="passwordValid" />
+        <result column="dept_id" property="deptId" />
+        <result column="post_id" property="postId" />
+    </resultMap>
+
+    <select id = "listUserPage" parameterType="string" resultType="com.yanyu.sky.sys.bean.vo.user.UserInfoVo">
+        select su.*,sd.dept_name,GROUP_CONCAT(sr.name) as roleName
+        from  sys_user su
+        left join sys_role_user sru
+        on su.id = sru.user_id
+        left join sys_role sr
+        on sr.id = sru.role_id and sr.is_del = '0'
+        left join sys_dept sd
+        on sd.id = su.dept_id and sd.is_del = '0'
+        <where>
+            su.is_del = '0'
+            <if test = "vo.userName != null and vo.userName != ''">
+                and su.user_name like concat('%',#{vo.userName},'%')
+            </if>
+            <if test = "vo.deptId != null and vo.deptId != ''">
+                and su.dept_id = #{vo.deptId}
+            </if>
+            <if test = "vo.nickName != null and vo.nickName != ''">
+                and su.nick_name like concat('%',#{vo.nickName},'%')
+            </if>
+            <if test = "vo.roleId != null and vo.roleId != ''">
+                and sru.role_id = #{vo.roleId}
+            </if>
+        </where>
+        group by su.id
+        order by su.update_time desc
+    </select>
+</mapper>

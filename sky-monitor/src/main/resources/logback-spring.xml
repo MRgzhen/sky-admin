@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <contextName>${spring.application.name}</contextName>
+    <springProperty scope="context" name="spring.application.name" source="spring.application.name"/>
+    <!--定义log.path，指定日志文件存储路径-->
+    <property name="log.path" value="logs/${spring.application.name}"/>
+    <!--定义log.maxHistory，指定日志文件存储天数-->
+    <property name="log.maxHistory" value="15"/>
+    <!--定义log.maxFileSize，指定日志文件存储数量-->
+    <property name="log.maxFileSize" value="50MB"/>
+
+    <!-- 彩色日志 -->
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+    <!-- 彩色日志格式 -->
+    <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%logger){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    <!--日志文件打印格式-->
+    <property name="FILE_LOG_PATTERN"
+              value="${CONSOLE_LOG_PATTERN:-%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } -2--  [%15.15t]  %logger : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    <!--输出到控制台 class用来指定输出策略 常用的控制台输出和文件输出 该配置为控制台输出-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--指定为log.colorPattern定义的彩色日志-->
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!--输出到文件-->
+    <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/info/info.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <MaxHistory>${log.maxHistory}</MaxHistory>
+            <MaxFileSize>${log.maxFileSize}</MaxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    <!-- ERROR级别的日志 -->
+    <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/error/error.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <MaxHistory>${log.maxHistory}</MaxHistory>
+            <MaxFileSize>${log.maxFileSize}</MaxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    <!--必选节点指定基础日志格式，appender中指定打印机别后会覆盖root指定的级别-->
+    <root level="info">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file_info"/>
+        <appender-ref ref="file_error"/>
+    </root>
+
+    <!--关闭nacos心跳-->
+    <logger name="com.alibaba.nacos" level="error" additivity="false">
+        <appender-ref ref="file_error"/>
+    </logger>
+    <logger name="com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder" level="debug" additivity="false">
+        <appender-ref ref="file_info"/>
+        <appender-ref ref="console"/>
+    </logger>
+    <logger name="org.apache" level="error" additivity="false">
+        <appender-ref ref="file_error"/>
+    </logger>
+    <logger name="com.zaxxer.hikari" level="error" additivity="false">
+        <appender-ref ref="file_error"/>
+    </logger>
+</configuration>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.yanyu</groupId>
+    <artifactId>sky-admin</artifactId>
+    <packaging>pom</packaging>
+    <version>1.1.0</version>
+    <modules>
+        <module>sky-common</module>
+        <module>sky-gateway</module>
+        <module>sky-auth</module>
+        <module>sky-system</module>
+        <module>sky-monitor</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <spring.boot-plugin.version>2.3.4.RELEASE</spring.boot-plugin.version>
+        <spring-boot-admin-starter-server.version>2.3.1</spring-boot-admin-starter-server.version>
+        <mybatis-plus-extension.version>3.4.0</mybatis-plus-extension.version>
+        <velocity.version>1.7</velocity.version>
+        <dynamic-datasource.version>3.2.1</dynamic-datasource.version>
+        <kaptcha.version>2.3.2</kaptcha.version>
+        <justAuth.version>1.15.9</justAuth.version>
+        <github.mrgzhen.version>1.1.0</github.mrgzhen.version>
+
+        <docker.skip.build>true</docker.skip.build>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.github.mrgzhen</groupId>
+                <artifactId>yanyu-spring-boot-starter</artifactId>
+                <version>${github.mrgzhen.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.mrgzhen</groupId>
+                <artifactId>yanyu-gateway</artifactId>
+                <version>${github.mrgzhen.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.yanyu</groupId>
+                <artifactId>sky-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.mrgzhen</groupId>
+                <artifactId>yanyu-fast</artifactId>
+                <version>${github.mrgzhen.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>yanyu-fast</id>
+            <url>https://raw.githubusercontent.com/MRgzhen/maven-repo/master/repository</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <finalName>${project.name}</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot-plugin.version}</version>
+                    <configuration>
+                        <finalName>${project.build.finalName}</finalName>
+                        <layers>
+                            <enabled>true</enabled>
+                        </layers>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <skipDocker>${docker.skip.build}</skipDocker>
+                        <!-- 镜像名称 -->
+                        <imageName>${project.artifactId}</imageName>
+                        <dockerDirectory>${basedir}</dockerDirectory>
+                        <!-- 指定远程docker地址 -->
+                        <dockerHost>https://39.100.226.51:2376</dockerHost>
+                        <!-- 证书地址 -->
+                        <dockerCertPath>E:\Workspaces_sky\ca</dockerCertPath>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

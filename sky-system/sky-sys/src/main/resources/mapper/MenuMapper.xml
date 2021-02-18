@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanyu.sky.sys.dao.MenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.yanyu.sky.sys.bean.po.Menu">
+        <id column="id" property="id" />
+        <result column="create_user" property="createUser" />
+        <result column="create_time" property="createTime" />
+        <result column="update_user" property="updateUser" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_del" property="isDel" />
+        <result column="parent_id" property="parentId" />
+        <result column="code" property="code" />
+        <result column="name" property="name" />
+        <result column="path" property="path" />
+        <result column="icon" property="icon" />
+        <result column="type" property="type" />
+        <result column="enabled" property="enabled" />
+        <result column="sort" property="sort" />
+        <result column="level" property="level" />
+        <result column="perms" property="perms" />
+    </resultMap>
+    <select id="listMenusByRoleIds" parameterType="string" resultMap="BaseResultMap">
+        select sm.* from
+        sys_menu sm,
+        sys_role_menu srm
+        where sm.is_del = '0'
+        and sm.id = srm.menu_id
+        <if test = "enabled != null and enabled != ''">
+            and sm.enabled = #{enabled}
+        </if>
+        <if test = "roleIds != null and roleIds.size()>0">
+            and srm.role_id in
+            <foreach collection="roleIds" open="(" close=")" separator="," item="roleId">
+                #{roleId}
+            </foreach>
+        </if>
+        <if test = "types != null and types.size()>0">
+            and type in
+            <foreach collection="types" open="(" close=")" separator="," item="type">
+                #{type}
+            </foreach>
+        </if>
+        group by sm.id
+        order by sm.sort asc
+    </select>
+</mapper>

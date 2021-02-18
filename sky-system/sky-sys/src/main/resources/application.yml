@@ -1,0 +1,79 @@
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/sky_sys?serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      connection-test-query: SELECT 1
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: UTC
+  mvc:
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
+
+# mybatis-plus配置
+mybatis-plus:
+  # 枚举包
+  type-enums-package: com.yanyu.sky.sys.bean.enums
+  global-config:
+    db-config:
+      #全局逻辑删除字段值 3.3.0开始支持，详情看下面。
+      logic-delete-field: isDel
+      # 逻辑已删除值(默认为 1)
+      logic-delete-value: 1
+      # 逻辑未删除值(默认为 0)
+      logic-not-delete-value: 0
+    banner: false
+  configuration:
+    # 打印日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# feigin 配置
+feign:
+  client:
+    config:
+      default:
+        # 连接超时时间（单位毫秒）
+        connectTimeout: 10000
+        # 读取超时时间（单位毫秒）
+        readTimeout: 10000
+  sentinel:
+    # 开启sentinel
+    enabled: true
+
+# 暴露端口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+# security配置
+security:
+  oauth2:
+    resource:
+      # 获取认证信息
+      user-info-uri: http://localhost:8081/auth/me
+      prefer-token-info: false
+# 自定义配置
+yanyu:
+  mybatis:
+    datascope:
+      tables:
+        - sys_datascope_test
+      mode: include
+      enabled: true
+  security:
+    permits:
+      - /sky/anon/api/**
+    ignores:
+      - /sys/social/auth/**
+  swagger:
+    base-package: com.yanyu.sky.sys.controller
+    enabled: true

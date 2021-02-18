@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    dynamic:
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      strict: false #设置严格模式,默认false不启动. 启动后在未匹配到指定数据源时候会抛出异常,不启动则使用默认数据源.
+      datasource:
+        master:
+          url: jdbc:mysql://127.0.0.1:3306/sky_generator?serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=utf-8&useSSL=true
+          username: root
+          password: root
+          driver-class-name: com.mysql.jdbc.Driver # 3.2.0开始支持SPI可省略此配置
+      druid:
+        remove-abandoned: true
+        remove-abandoned-timeout-millis: 60
+        log-abandoned: true
+mybatis-plus:
+  type-enums-package: com.yanyu.sky.generator.bean.enums
+  global-config:
+    db-config:
+      logic-delete-field: isDel
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:8081/auth/me
+      prefer-token-info: false
+yanyu:
+  swagger:
+    base-package: com.yanyu.sky.generator.controller
+    enabled: true
+  security:
+    resource:
+      user-info-uri: http://localhost:8081/auth/me
