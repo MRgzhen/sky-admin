@@ -39,9 +39,8 @@ CREATE TABLE `gen_attr` (
 -- Records of gen_attr
 -- ----------------------------
 INSERT INTO `gen_attr` VALUES ('1', 'DEFAULT', 'javaBeanName', 'DEFAULT', 'java Bean名字', '2', '1', '', '2021-01-08 10:15:40', '', '2021-01-08 15:35:43', '0');
-INSERT INTO `gen_attr` VALUES ('1347386174098489346', '1329644366620233730', 'test', 'test', 'test', '1', '1', '', '2021-01-08 11:34:31', '', '2021-01-08 11:34:31', '0');
 INSERT INTO `gen_attr` VALUES ('2', 'DEFAULT', 'javaPackageName', 'DEFAULT', 'java包名', '2', '2', '', '2021-01-08 10:16:20', '', '2021-01-08 15:35:45', '0');
-INSERT INTO `gen_attr` VALUES ('22', '1329644366620233730', 'zhangsan', 'test', '3', '1', '1', '', '2021-01-08 13:48:23', '', '2021-01-08 13:48:36', '0');
+INSERT INTO `gen_attr` VALUES ('22', '1329644366620233730', 'test', 'test', '测试属性', '1', '1', '', '2021-01-08 13:48:23', '', '2021-01-08 13:48:36', '0');
 INSERT INTO `gen_attr` VALUES ('3', 'DEFAULT', 'javaModuleName', 'DEFAULT', 'java模块名', '2', '3', '', '2021-01-08 10:16:38', '', '2021-01-08 15:35:46', '0');
 INSERT INTO `gen_attr` VALUES ('4', 'DEFAULT', 'author', 'DEFAULT', '作者', '2', '4', '', '2020-11-19 13:18:10', '', '2021-01-08 15:35:48', '0');
 INSERT INTO `gen_attr` VALUES ('5', 'DEFAULT', 'date', 'DEFAULT', '创建时间', '2', '5', '', '2021-01-08 10:17:22', '', '2021-01-08 15:35:48', '0');
@@ -77,9 +76,7 @@ CREATE TABLE `gen_ds_setting` (
 -- ----------------------------
 -- Records of gen_ds_setting
 -- ----------------------------
-INSERT INTO `gen_ds_setting` VALUES ('1329249639961907201', 'shiro', 'shiro', 'com.mysql.cj.jdbc.Driver', 'jdbc:mysql://127.0.0.1:3306/shiro?serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=utf-8&useSSL=true', 'root', 'root', '', '', '2020-11-19 10:26:25', '', '2020-12-03 17:03:44', '0');
-INSERT INTO `gen_ds_setting` VALUES ('1347339990067679233', 'sky_pms', 'sky_pms', 'com.mysql.cj.jdbc.Driver', 'jdbc:mysql://127.0.0.1:3306/sky_mall_pms?serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=utf-8&useSSL=true', 'root', 'root', '', '1', '2021-01-08 08:31:01', '1', '2021-01-08 08:31:01', '0');
-INSERT INTO `gen_ds_setting` VALUES ('1351765395881111553', 'sky_admin_sys', 'sky_admin_sys', 'com.mysql.cj.jdbc.Driver', 'jdbc:mysql://127.0.0.1:3306/sky_admin_sys?serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=utf-8&useSSL=true', 'root', 'root', '', '1', '2021-01-20 13:36:01', '1', '2021-01-20 13:36:01', '0');
+INSERT INTO `gen_ds_setting` VALUES ('1351765395881111553', 'sky_test', 'sky_admin_sys', 'com.mysql.cj.jdbc.Driver', 'jdbc:mysql://127.0.0.1:3306/sky_test?serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=utf-8&useSSL=true', 'root', 'root', '', '1', '2021-01-20 13:36:01', '1', '2021-01-20 13:36:01', '0');
 
 -- ----------------------------
 -- Table structure for `gen_template`
@@ -103,16 +100,16 @@ CREATE TABLE `gen_template` (
 -- ----------------------------
 -- Records of gen_template
 -- ----------------------------
-INSERT INTO `gen_template` VALUES ('1', '1329644366620233730', '${NAME}.java', 'bean.po', '实体类', '', '', '2020-11-27 14:58:24', '1', '2021-01-08 17:01:55', '0');
+INSERT INTO `gen_template` VALUES ('1334762314154303411', '1329644366620233730', '${NAME}.java', 'bean.po', '实体类', '', '', '2020-11-27 14:58:24', '1', '2021-01-08 17:01:55', '0');
 INSERT INTO `gen_template` VALUES ('1334762314154303489', '1329644366620233730', '${NAME}Controller.java', 'controller', '前端控制器', '', '1', '2020-12-04 15:31:49', '1', '2021-01-08 17:01:23', '0');
 INSERT INTO `gen_template` VALUES ('1334762511672467457', '1329644366620233730', '${NAME}Mapper.java', 'dao', 'Mapper接口', '', '1', '2020-12-04 15:32:36', '1', '2021-01-08 17:01:44', '0');
 INSERT INTO `gen_template` VALUES ('1334762667490861058', '1329644366620233730', 'I${NAME}Service.java', 'service', '业务接口', '', '1', '2020-12-04 15:33:13', '1', '2021-01-08 17:01:49', '0');
 INSERT INTO `gen_template` VALUES ('1334762796813836289', '1329644366620233730', '${NAME}ServiceImpl.java', 'service.impl', '业务实现类', '', '1', '2020-12-04 15:33:44', '1', '2021-01-08 17:01:39', '0');
 INSERT INTO `gen_template` VALUES ('1334770758089416705', '1329644366620233730', '${NAME}Mapper.xml', 'mapper', 'MapperXml', '', '1', '2020-12-04 16:05:22', '1', '2021-01-08 17:01:32', '0');
-INSERT INTO `gen_template` VALUES ('1347454524065411073', '1329644366620233730', 'add.vue', 'vue.${PATH}', '新增', '', '1', '2021-01-08 16:06:08', '1', '2021-01-08 17:07:15', '0');
+INSERT INTO `gen_template` VALUES ('1347454524065411073', '1329644366620233730', 'add.vue', 'vue.${PATH}', '前端新增对话框', '', '1', '2021-01-08 16:06:08', '1', '2021-01-08 17:07:15', '0');
 INSERT INTO `gen_template` VALUES ('1347454756299829250', '1329644366620233730', 'index.vue', 'vue.${PATH}', '前端index', '', '1', '2021-01-08 16:07:03', '1', '2021-01-08 17:07:24', '0');
-INSERT INTO `gen_template` VALUES ('1347454869571203074', '1329644366620233730', 'rule.js', 'vue.${PATH}', '', '', '1', '2021-01-08 16:07:30', '1', '2021-01-08 17:04:02', '0');
-INSERT INTO `gen_template` VALUES ('1347454967986352130', '1329644366620233730', 'api.js', 'vue.${PATH}', '', '', '1', '2021-01-08 16:07:54', '1', '2021-01-08 17:07:33', '0');
+INSERT INTO `gen_template` VALUES ('1347454869571203074', '1329644366620233730', 'rule.js', 'vue.${PATH}', '前端校验规则', '', '1', '2021-01-08 16:07:30', '1', '2021-01-08 17:04:02', '0');
+INSERT INTO `gen_template` VALUES ('1347454967986352130', '1329644366620233730', 'api.js', 'vue.${PATH}', '前端api接口', '', '1', '2021-01-08 16:07:54', '1', '2021-01-08 17:07:33', '0');
 
 -- ----------------------------
 -- Table structure for `gen_template_desc`
@@ -133,7 +130,7 @@ CREATE TABLE `gen_template_desc` (
 -- ----------------------------
 -- Records of gen_template_desc
 -- ----------------------------
-INSERT INTO `gen_template_desc` VALUES ('1', 'package ${javaPackageName}.${javaModuleName}.bean.po;\n\nimport com.baomidou.mybatisplus.annotation.TableName;\nimport io.swagger.annotations.ApiModel;\nimport io.swagger.annotations.ApiModelProperty;\nimport lombok.Data;\nimport java.io.Serializable;\n\n/**\n * 功能: ${tableDesc} 实体类\n * @author ${author}\n * @date ${date}\n */\n@Data\n@TableName(\"${tableName}\")\n@ApiModel(value = \"${javaBeanName}对象}\", description = \"${tableDesc}\")\npublic class ${javaBeanName} implements Serializable {\n\n    private static final long serialVersionUID = 1L;\n\n    #foreach ($column in $tableColumns)\n@ApiModelProperty(value = \"${column.attrDesc}\")\n    private $column.attrType $column.attrName;\n    #end\n}', '', '', '2020-11-27 14:58:38', '1', '2021-01-08 17:01:55', '0');
+INSERT INTO `gen_template_desc` VALUES ('1334755397470224306', 'package ${javaPackageName}.${javaModuleName}.bean.po;\n\nimport com.baomidou.mybatisplus.annotation.TableName;\nimport io.swagger.annotations.ApiModel;\nimport io.swagger.annotations.ApiModelProperty;\nimport lombok.Data;\nimport java.io.Serializable;\n\n/**\n * 功能: ${tableDesc} 实体类\n * @author ${author}\n * @date ${date}\n */\n@Data\n@TableName(\"${tableName}\")\n@ApiModel(value = \"${javaBeanName}对象}\", description = \"${tableDesc}\")\npublic class ${javaBeanName} implements Serializable {\n\n    private static final long serialVersionUID = 1L;\n\n    #foreach ($column in $tableColumns)\n@ApiModelProperty(value = \"${column.attrDesc}\")\n    private $column.attrType $column.attrName;\n    #end\n}', '', '', '2020-11-27 14:58:38', '1', '2021-01-08 17:01:55', '0');
 INSERT INTO `gen_template_desc` VALUES ('1334755397470224386', 'package ${javaPackageName}.${javaModuleName}.bean.po;\r\n\r\nimport com.baomidou.mybatisplus.annotation.TableName;\r\nimport io.swagger.annotations.ApiModel;\r\nimport io.swagger.annotations.ApiModelProperty;\r\nimport lombok.Data;\r\n\r\n/**\r\n * <br/>功能: ${tableDesc} 实体类\r\n * <br/>版本: 1.0\r\n * <br/>开发人员: ${author}\r\n * <br/>创建日期: ${date}\r\n * <br/>修改日期: ${date}\r\n * <br/>修改列表:\r\n */\r\n@Data\r\n@TableName(\"${tableName}\")\r\n@ApiModel(value = \"${javaBeanName}对象}\", description = \"${tableDesc}\")\r\npublic class ${javaBeanName} implements Serializable {\r\n\r\n    private static final long serialVersionUID = 1L;\r\n\r\n    #foreach ($column in $tableColumns)\r\n    @ApiModelProperty(value = \"${column.attrDesc}\")\r\n    private $column.attrType $column.attrName;\r\n    #end\r\n}\r\n', '', '', '2020-12-04 15:04:19', '', '2020-12-04 15:04:19', '0');
 INSERT INTO `gen_template_desc` VALUES ('1334755490541830146', 'package ${javaPackageName}.${javaModuleName}.bean.po;\r\n\r\nimport com.baomidou.mybatisplus.annotation.TableName;\r\nimport io.swagger.annotations.ApiModel;\r\nimport io.swagger.annotations.ApiModelProperty;\r\nimport lombok.Data;\r\n\r\n/**\r\n * <br/>功能: ${tableDesc} 实体类\r\n * <br/>版本: 1.0\r\n * <br/>开发人员: ${author}\r\n * <br/>创建日期: ${date}\r\n * <br/>修改日期: ${date}\r\n * <br/>修改列表:\r\n */\r\n@Data\r\n@TableName(\"${tableName}\")\r\n@ApiModel(value = \"${javaBeanName}对象}\", description = \"${tableDesc}\")\r\npublic class ${javaBeanName} implements Serializable {\r\n\r\n    private static final long serialVersionUID = 1L;\r\n\r\n    #foreach ($column in $tableColumns)\r\n    @ApiModelProperty(value = \"${column.attrDesc}\")\r\n    private $column.attrType $column.attrName;\r\n    #end\r\n}\r\n', '', '', '2020-12-04 15:04:42', '', '2020-12-04 15:04:42', '0');
 INSERT INTO `gen_template_desc` VALUES ('1334755659710693378', 'package ${javaPackageName}.${javaModuleName}.bean.po;\r\n\r\nimport com.baomidou.mybatisplus.annotation.TableName;\r\nimport io.swagger.annotations.ApiModel;\r\nimport io.swagger.annotations.ApiModelProperty;\r\nimport lombok.Data;\r\n\r\n/**\r\n * <br/>功能: ${tableDesc} 实体类\r\n * <br/>版本: 1.0\r\n * <br/>开发人员: ${author}\r\n * <br/>创建日期: ${date}\r\n * <br/>修改日期: ${date}\r\n * <br/>修改列表:\r\n */\r\n@Data\r\n@TableName(\"${tableName}\")\r\n@ApiModel(value = \"${javaBeanName}对象}\", description = \"${tableDesc}\")\r\npublic class ${javaBeanName} implements Serializable {\r\n\r\n    private static final long serialVersionUID = 1L;\r\n\r\n    #foreach ($column in $tableColumns)\r\n    @ApiModelProperty(value = \"${column.attrDesc}\")\r\n    private $column.attrType $column.attrName;\r\n    #end\r\n}\r\n', '', '', '2020-12-04 15:05:22', '', '2020-12-04 15:05:22', '0');
@@ -176,33 +173,4 @@ CREATE TABLE `gen_template_group` (
 -- ----------------------------
 -- Records of gen_template_group
 -- ----------------------------
-INSERT INTO `gen_template_group` VALUES ('1329346808123478018', 'sky', '2', '', '', '', '2020-11-19 16:52:31', '', '2021-01-08 08:54:32', '1');
 INSERT INTO `gen_template_group` VALUES ('1329644366620233730', 'sky', '1', 'sky项目', '', '', '2020-11-20 12:34:55', '', '2020-11-20 12:34:55', '0');
-INSERT INTO `gen_template_group` VALUES ('1332135866385989634', 'Controller', '0', '模板', '', '', '2020-11-27 09:35:15', '', '2020-11-27 09:35:43', '1');
-INSERT INTO `gen_template_group` VALUES ('1347106692473131010', '11', '1', '11', '', '1', '2021-01-07 17:03:58', '1', '2021-01-08 08:54:26', '1');
-INSERT INTO `gen_template_group` VALUES ('1347374253106348034', 'test', '2', '只是测试一下', '', '1', '2021-01-08 10:47:10', '1', '2021-01-08 10:47:10', '0');
-
--- ----------------------------
--- Table structure for `student`
--- ----------------------------
-DROP TABLE IF EXISTS `student`;
-CREATE TABLE `student` (
-  `id` varchar(32) NOT NULL,
-  `username` varchar(32) NOT NULL COMMENT '用户名称',
-  `age` datetime DEFAULT NULL COMMENT '生日',
-  `CREATE_BY` varchar(64) NOT NULL COMMENT '创建人',
-  `CREATE_DATE` datetime DEFAULT NULL COMMENT '创建时间',
-  `UPDATE_BY` varchar(64) DEFAULT NULL COMMENT '更新人',
-  `UPDATE_DATE` datetime DEFAULT NULL COMMENT '更新时间',
-  `REMARKS` varchar(255) DEFAULT NULL COMMENT '备注',
-  `DEL_FLAG` char(1) NOT NULL DEFAULT '0' COMMENT '删除标识',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of student
--- ----------------------------
-INSERT INTO `student` VALUES ('253d4471d59d90cc427991aabd967cfa', '张三3', '2020-06-10 16:24:34', 'admin', '2020-06-10 16:24:35', 'admin', '2020-06-10 16:24:35', null, '1');
-INSERT INTO `student` VALUES ('6a4dd1b00fadd2edc93c862af55e08b7', '张三3', '2020-06-10 09:14:11', 'admin', null, null, null, null, '0');
-INSERT INTO `student` VALUES ('84891dec67a0975cc99e895950775705', '张三3', '2020-06-10 09:15:10', 'admin', '2020-06-10 09:15:10', null, null, null, '0');
-INSERT INTO `student` VALUES ('d4e1f8a6ac2b9c2d5cc176f1f0e23a69', '张三3', '2020-06-10 09:13:14', 'admin', null, null, null, null, '0');
