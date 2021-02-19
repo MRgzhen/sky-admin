@@ -60,12 +60,12 @@
         </dependencies>
     </dependencyManagement>
 
-<!--    <repositories>-->
-<!--        <repository>-->
-<!--            <id>yanyu-fast</id>-->
-<!--            <url>https://raw.githubusercontent.com/MRgzhen/maven-repo/master/repository</url>-->
-<!--        </repository>-->
-<!--    </repositories>-->
+    <repositories>
+        <repository>
+            <id>yanyu-fast</id>
+            <url>https://raw.githubusercontent.com/MRgzhen/maven-repo/master/repository</url>
+        </repository>
+    </repositories>
 
     <build>
         <finalName>${project.name}</finalName>
