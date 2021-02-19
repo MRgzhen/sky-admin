@@ -7,6 +7,7 @@ import com.github.mrgzhen.core.web.Result;
 import com.yanyu.sky.sys.bean.vo.social.SocialAuthVo;
 import com.yanyu.sky.sys.bean.vo.social.SocialBindVo;
 import com.yanyu.sky.sys.bean.vo.social.SocialUnBindVo;
+import com.yanyu.sky.sys.properties.SocialAuthProperties;
 import com.yanyu.sky.sys.service.ISocialService;
 import com.yanyu.sky.sys.util.SocialUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -38,13 +39,18 @@ public class SocialAuthController {
     private ISocialService socialService;
     @Autowired
     private SocialUtil socialUtil;
-    private static final String redirectUrl = "http://sky.yyudo.cn:8081/sys/social/auth/%s/callback";
-    private static final String clientId = "bcaa655427c93d7f593e563ae82f95dab5fd3433e15db58e94b42a002f80b757";
-    private static final String clientSecret = "6342ff3944cabdae49296ade8ce6d44c756c2b32421d2351be626e5e757a7864";
+    @Autowired
+    private SocialAuthProperties socialAuthProperties;
 
     @RequestMapping("/login/{app}")
     @ApiIgnore
-    public RedirectView login(@PathVariable("app") String app, @RequestParam("domain") String domain) {
+    public RedirectView login(@PathVariable("app") String app, @RequestParam("domain") String domain, HttpServletResponse response) throws JsonProcessingException {
+        if(socialAuthProperties.getApp().get(app) == null) {
+            // 关闭
+            socialUtil.toDomain(response, JSONUtil.instant().writeValueAsString(Result.fail(new ServiceException())), domain);
+            return new RedirectView();
+        }
+
         AuthRequest authRequest = getAuthRequest(app);
         String state = AuthStateUtils.createState();
         socialUtil.putDomain(app, state, domain);
@@ -70,10 +76,11 @@ public class SocialAuthController {
     }
 
     private AuthRequest getAuthRequest(String app) {
+        SocialAuthProperties.App socialApp = socialAuthProperties.getApp().get(app);
         return new AuthGiteeRequest(AuthConfig.builder()
-                .clientId(clientId)
-                .clientSecret(clientSecret)
-                .redirectUri(StringUtils.join(String.format(redirectUrl, app)))
+                .clientId(socialApp.getClientId())
+                .clientSecret(socialApp.getClientSecret())
+                .redirectUri(StringUtils.join(String.format(socialApp.getRedirectUrl(), app)))
                 .build());
     }
 }
