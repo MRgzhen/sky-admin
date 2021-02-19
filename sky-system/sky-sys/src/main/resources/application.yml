@@ -80,6 +80,6 @@ yanyu:
   social:
     app:
       gitee:
-        redirect-url: http://sky.yyudo.cn:8081/sys/social/auth/%s/callback
+        redirect-url: http://localhost:8081/sys/social/auth/%s/callback
         client-id: bcaa655427c93d7f593e563ae82f95dab5fd3433e15db58e94b42a002f80b757
-        client-secret: ****
+        client-secret: 1
